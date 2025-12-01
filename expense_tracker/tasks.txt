@@ -1,0 +1,115 @@
+Great! Here are progressive tasks that will turn your Expense Tracker into a complete mini-project.
+Start from Level-1 → Level-6, each level adds new skills.
+
+🟩 LEVEL 1 — Basic Features (You already know this)
+
+✔ Add an expense (category + amount)
+✔ View all expenses
+✔ View total spent
+
+✅ Task-1: Add validation
+
+If amount is negative → show error
+If category is empty → show error
+
+🟦 LEVEL 2 — Category-Wise Features
+✅ Task-2: Show total for each category
+
+Example output:
+
+food: 350
+travel: 120
+shopping: 500
+
+
+Hint:
+Use a dictionary:
+
+category_totals = {}
+
+🟧 LEVEL 3 — Improve Usability
+✅ Task-3: Add Date to every expense
+
+Store each expense like this:
+
+{"category": "food", "amount": 200, "date": "2025-01-05"}
+
+
+Ask user:
+Enter date (DD/MM/YYYY):
+or auto-fill today’s date using:
+
+from datetime import date
+date.today()
+
+🟨 LEVEL 4 — Update & Delete Features
+✅ Task-4: Delete an expense
+
+Show numbered list:
+
+1. food - 200  
+2. travel - 150  
+3. shopping - 300
+
+
+Ask:
+Enter index to delete:
+
+Remove using:
+
+del expenses[index]
+
+✅ Task-5: Update an expense
+
+Let user change:
+
+category
+
+amount
+
+date
+
+🟫 LEVEL 5 — File Handling (Very Important for Mini Projects)
+✅ Task-6: Save all expenses to a file (JSON)
+
+Save list to file:
+
+import json
+json.dump(expenses, open("expenses.json", "w"), indent=4)
+
+✅ Task-7: Load expenses when program starts
+expenses = json.load(open("expenses.json"))
+
+
+This makes your project real-world.
+
+🟥 LEVEL 6 — Bonus Tasks (If you want to impress in interviews)
+⭐ Task-8: Search by category
+
+Input:
+
+enter category: food
+
+
+Output:
+
+food - 200
+food - 150
+
+⭐ Task-9: Filter by date
+
+Example:
+
+show expenses on 2025-01-05
+
+⭐ Task-10: Pretty UI Output
+
+Format output like a table:
+
+---------------------------------------
+Category        Amount        Date
+---------------------------------------
+food            200           2025-01-05
+travel          150           2025-01-06
+---------------------------------------
+Total: 350
