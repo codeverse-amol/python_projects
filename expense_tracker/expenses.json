@@ -1,0 +1,37 @@
+[
+    {
+        "category": "milk",
+        "amount": 200,
+        "date": "2025-11-01"
+    },
+    {
+        "category": "eggs",
+        "amount": 100,
+        "date": "2025-09-02"
+    },
+    {
+        "category": "sandwitch",
+        "amount": 500,
+        "date": "2000-12-05"
+    },
+    {
+        "category": "vegetables",
+        "amount": 350,
+        "date": "2025-12-01"
+    },
+    {
+        "category": "momos",
+        "amount": 290,
+        "date": "2025-10-01"
+    },
+    {
+        "category": "travel",
+        "amount": 5000,
+        "date": "2025-11-01"
+    },
+    {
+        "category": "milk",
+        "amount": 150,
+        "date": "2025-12-01"
+    }
+]

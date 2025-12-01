@@ -22,11 +22,6 @@ travel: 120
 shopping: 500
 
 
-Hint:
-Use a dictionary:
-
-category_totals = {}
-
 🟧 LEVEL 3 — Improve Usability
 ✅ Task-3: Add Date to every expense
 
