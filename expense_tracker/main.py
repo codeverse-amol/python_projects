@@ -9,10 +9,6 @@
 
 
 
-
-
-
-
 import json
 
 from datetime import date
@@ -32,10 +28,12 @@ def load_expenses():
             lst = json.load(f)
 
         print("Loaded expenses from file.\n")
-        print(lst)
+        print("📌 Expenses:")
+        for i, exp in enumerate(lst, start=1):
+            print(f"{i}. {exp}")
 
     except FileNotFoundError:
-        print("No existing file found. Starting fresh.\n")
+        print("📁 No existing file found. Starting fresh.\n")
 
 
 # -------------------------
@@ -50,6 +48,7 @@ def save_expenses():
             "category": exp["category"],
             "amount": exp["amount"],
             "date": exp["date"]
+
         })
 
     with open("expenses.json", "w") as f:
@@ -65,14 +64,11 @@ def save_expenses():
 
 def expense_tracker(n):
     try:
-
         match n:
-
             # -------------------------
             # 1. Add Expense
             # -------------------------
             case 1:
-
                 while True:
 
                     category = input("Enter the category: ").strip()
@@ -88,9 +84,10 @@ def expense_tracker(n):
                         raise ValueError("Amount cannot be negative.")
                     else:
                         print("Invalid input!")
-                    
-                    ask = input("Do you add more expenses? (y/n) ").lower()
 
+                    print("✅ Expense added successfully!\n")
+
+                    ask = input("Do you add more expenses? (y/n) ").lower()
                     if ask != "y":
                         break
 
@@ -98,34 +95,29 @@ def expense_tracker(n):
             # 2. Show Total per Category
             # -------------------------
             case 2:
-                try:
-                    category_totals.clear()
+                
+                category_totals.clear()
 
-                    for expense in lst:
-                        cat = expense["category"]
-                        amt = expense["amount"]
+                for expense in lst:
+                    cat = expense["category"]
+                    amt = expense["amount"]
 
-                        if cat in category_totals:
-                            category_totals[cat] += amt
-                        else:
-                            category_totals[cat] = amt
-                    
-                    print(f"{'No':<5}{'Category':<15}{'Total Amount':<15}")
-                    print("-" * 35)
-                    for index, (cat, amt) in enumerate(category_totals.items(), start=1):
-                        print(f"{index:<5}{cat:<15}{amt:<15}")
-                    print("-" * 35)
+                    if cat in category_totals:
+                        category_totals[cat] += amt
+                    else:
+                        category_totals[cat] = amt
+                
+                print(f"{'No':<5}{'Category':<15}{'Total Amount':<15}")
+                print("-" * 35)
+                for index, (cat, amt) in enumerate(category_totals.items(), start=1):
+                    print(f"{index:<5}{cat:<15}{amt:<15}")
 
+                print()
 
-                except ValueError:
-                    print("Invalid input!")
-                except TypeError:
-                    print("Wrong inputs!!")
             # -------------------------
             # 3. Show Total Expense
             # -------------------------
             case 3:
-
                 try:
 
                     print(f"{'No':<5}{'Category':<15}{'Amount':<10}{'Date'}")
@@ -144,28 +136,25 @@ def expense_tracker(n):
                 except TypeError:
                     print("Wrong inputs!!")
 
-
             # -------------------------
             # 4. Delete Expense
             # -------------------------
             case 4:
+                if not lst:
+                    print("❌ No expenses to delete.\n")
+                    return
 
-                # show items with numbers
-                for i, (key, value) in enumerate(category_totals.items(), start=1):
-                    print(f"{i}. {key} : {value}")
-                # take input
-                index = int(input("Enter index to delete the expense:"))
-                # find actual key
-                key_to_delete = list(category_totals.keys())[index - 1]
-                # delete it
-                lst.pop(index-1)
+                print("\n📌 Expenses:")
+                for i, exp in enumerate(lst, start=1):
+                    print(f"{i}. {exp}")
 
-                del category_totals[key_to_delete]
-                # print updated expenses
-                print("Updated expenses: ", category_totals)
-                print(lst)
+                index = int(input("\nEnter index to delete: "))
 
-
+                if index < 1 or index > len(lst):
+                    print("❌ Invalid index.\n")
+                else:
+                    deleted = lst.pop(index - 1)
+                    print(f"🗑 Deleted: {deleted}\n")
             # -------------------------
             # 5. Update Expense
             # -------------------------
@@ -179,7 +168,7 @@ def expense_tracker(n):
                 # Step 1: Ask which dictionary (expense) to update
                 index = int(input("\nEnter index of the expense you want to update: "))
 
-                if index < 0 or index > len(lst):
+                if index < 1 or index > len(lst):
                     print("Invalid index")
                 else:
                     d = lst[index-1]     # this is the dictionary to update
@@ -205,22 +194,24 @@ def expense_tracker(n):
                             new_value = int(input(f"Enter new value for '{key}': "))
 
                         elif key == "date":
-                            new_value_raw = input(f"Enter new value for '{key}': ")
+                            new_value_raw = input(f"Enter new value for '{key}'(YYYY-MM-DD): ")
                             
                             try:
-                                new_value = date.fromisoformat(new_value_raw)
-                            except Exception:
+                                new_value = date.fromisoformat(new_value_raw).isoformat()
+                            except:
                                 print("Invalid date format. Use YYYY-MM-DD.")
+                                return
+                            
                         else:     
                             new_value = input(f"Enter new value for '{key}': ")
 
                         d[key] = new_value   # updates the SAME object inside list
 
-                        print("\nUpdated Successfully")
+                        print("✅ Updated Successfully\n")
                         print("Updated expense:", d)
-                        print("Updated list:", lst)
+         
                     else:
-                        print("Invalid choice.\n")
+                        print("❌ Invalid choice.\n")
 
             # -------------------------
             # 6. Search by category
@@ -229,25 +220,24 @@ def expense_tracker(n):
 
                 try:
 
-                    choice = input("enter category: ")
+                    choice = input("Enter category: ")
                     matches = [item for item in lst if item["category"] == choice]
 
                     if matches:
                         for i, item in enumerate(matches, start=1):
-                            print(f"{i}. {item["category"]} : {item["amount"]} on {item["date"]}")
+                            print(f"{i}. {item['category']} : {item['amount']} on {item['date']}")
 
                     else:
                         raise KeyError(f"'{choice}' not found in expenses.")
 
                 except ValueError:
-                    print("Invalid category!!")
+                    print("❌ Invalid category!!")
                 
                 except KeyError as e:
                     print("Error: ", e)
 
-
             # -------------------------
-            # 7. Filter by date
+            # 7. Search by date
             # -------------------------
             case 7:
 
@@ -256,13 +246,11 @@ def expense_tracker(n):
                 result = [item for item in lst if item["date"] == d]
                     
                 if result:
-                    print(f"Expenses found on {d} are: ")
+                    print(f"📌 Expenses found on {d} are: ")
                     for i, item in enumerate(result, start=1):
-                        print(f"{i}. {item["category"]} : {item["amount"]}")
+                        print(f"{i}. {item['category']} : {item['amount']}")
                 else:
-                    print(f"No expenses found on {d}")              
-
-                
+                    print(f"❌ No expenses found on {d}") 
 
 
             # -------------------------
@@ -270,20 +258,17 @@ def expense_tracker(n):
             # -------------------------
             case 8:
                 save_expenses()
-
             # -------------------------
             # 9. Load from File
             # -------------------------
             case 9:
                 load_expenses()
+            # -------------------------
+            # 0. Exit   
+            # -------------------------
 
 
-
-            case _:
-                print("Invalid choice.\n")
-
-
-    except ValueError as e:
+    except Exception as e:
         print("Error:", e)
 
 
@@ -298,21 +283,31 @@ print("----- Expense Tracker-----")
 print("=================================")
 while True:
     try:
-        print("\n<= Main Menu =>\n")
-        print("1. Add Expense")
-        print("2. Show total per category")
-        print("3. Show total expenses")
-        print("4. Delete expense")
-        print("5. Update expense")
-        print("6. Search by category")
-        print("7. Filter by date")
-        print("8. Save expenses")
-        print("9. Load expenses")
+        print("=================================")
+        print("     📘 Expense Tracker Menu")
+        print("=================================")
+
+        print("1. ➕  Add Expense")
+        print("2. 📊  Show Total per Category")
+        print("3. 💰  Show Total Expenses")
+        print("4. 🗑️   Delete Expense")
+        print("5. ✏️   Update Expense")
+        print("6. 🔎  Search by Category")
+        print("7. 📅  Search by Date")
+        print("8. 💾  Save Expenses")
+        print("9. 📂  Load Expenses")
+        print("0. 🚪  Exit")
         print("=================================")
 
         n = int(input("Enter choice: "))
         print()
         expense_tracker(n)
-        print("-" * 40) #-------------------------------------------------  
-    except:
-        print("Invalid inputs, try again!!")
+
+    except Exception as e:
+        print("Error:", e)
+
+    if n == 0:
+        print("Exiting Expense Tracker. Goodbye!")
+        print("-" * 40) #------------------------------------------------- 
+        break
+
