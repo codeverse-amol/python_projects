@@ -1,0 +1,83 @@
+
+# import random
+# print("=========================")
+# print("#--Number Guessing Game--#")
+# print("=========================")
+
+# rand_num = random.randint(1, 101)
+
+# attempts = 5
+# for i in range(attempts):
+    
+#     user_num = int(input("Guess a number :"))
+    
+#     if user_num  == rand_num :
+#         print("Correct")
+            
+#     if user_num < rand_num :
+#         print("Too low")
+        
+            
+#     if user_num > rand_num :
+#         print("Too high")
+    
+#     attempts -= 1
+#     if attempts > 0:
+#         print(f"\nTry again, {attempts} attempts left")
+#         print("=========================")
+
+# if user_num != rand_num:
+#     print("\nOut of attempts, The number was:", rand_num)
+    
+
+
+# import random
+# print("=========================")
+# print("#--Number Guessing Game--#")
+# print("=========================")
+
+# def num_guess():
+#     while True:
+#         try:
+#             rand_num = random.randint(1, 100)
+#             user_num = int(input("Guess a number :"))
+#             attempts = 5
+#             for _ in range(attempts):
+                
+#                 if user_num  == rand_num :
+#                     print("Correct")
+                    
+                        
+#                 if user_num < rand_num :
+#                     print("Too low")
+                   
+                    
+                        
+#                 if user_num > rand_num :
+#                     print("Too high")
+                    
+                
+#                 attempts -= 1
+#                 if attempts > 0:
+#                     print(f"\nTry again, {attempts} attempts left")
+#                     print("=========================")
+
+#             if user_num != rand_num:
+#                 print("\nOut of attempts, The number was:", rand_num)
+#         except:
+#             print("Invalid Input!")
+#             break
+
+
+# num_guess()
+
+
+# while True:           
+    
+#     ask = input("Do you want to play again? (y/n):")
+    
+#     if ask == "y":
+#         num_guess()
+#     else:
+#         print("Quitting...")
+
