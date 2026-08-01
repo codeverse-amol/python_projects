@@ -1,0 +1,11 @@
+order_id,customer,category,amount,status
+1001,Alice Johnson,Electronics,2499.99,Completed
+1002,Bob Smith,Books,599.50,Pending
+1003,Alice Johnson,Accessories,799.00,Completed
+1004,Chris Lee,Electronics,1299.00,Cancelled
+1005,David Patel,Furniture,8999.99,Completed
+1006,Emma Wilson,Books,450.00,Completed
+1007,Bob Smith,Furniture,3200.00,Pending
+1008,Grace Martin,Accessories,1200.00,Completed
+1009,Henry Davis,Electronics,5400.00,Completed
+1010,Ivy Thomas,Books,799.99,Cancelled
