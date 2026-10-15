@@ -9,5 +9,5 @@ class Order:
     order_id: int
     customer : str
     category : str
-    amount : str
+    amount : float
     status : str
