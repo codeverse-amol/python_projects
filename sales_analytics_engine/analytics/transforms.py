@@ -3,7 +3,7 @@
 from analytics.models import Order
 
 
-def transform_order(row: dict[str, str]) -> "Order":
+def transform_order(row: dict[str, str]) -> Order:
     """
     Transform a raw CSV row into an Order object.
 
